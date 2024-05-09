@@ -1,17 +1,12 @@
 <template>
-  <div class="home">
-    {{ name }}
-  </div>
+  <DefaultLayout>
+    <RouterView/>
+  </DefaultLayout>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
-
-  const name = ref('Home')
+import DefaultLayout from './layouts/DefaultLayout.vue';
 </script>
 
 <style scoped>
-  .home {
-    color: red;
-  }
 </style>
