@@ -3,7 +3,8 @@ import { createWebHistory, createRouter } from 'vue-router'
 export const enum RouteName {
   Home = 'home',
   ContactList = 'contact-list',
-  ContactEditor = 'contact-editor'
+  ContactEditor = 'contact-editor',
+  Components = 'components'
 }
 
 const routes = [
@@ -21,6 +22,11 @@ const routes = [
     path: '/contact-editor/:id',
     name: RouteName.ContactEditor,
     component: () => import('@/pages/ContactEditorPage.vue')
+  },
+  {
+    path: '/components',
+    name: RouteName.Components,
+    component: () => import('@/pages/Components.vue')
   }
 ]
 
