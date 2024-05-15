@@ -18,14 +18,16 @@
     </aside>
     <div class="body">
       <header class="header">
-        <button class="back-button" @click="router.back()">
-          <span class="material-symbols-outlined back-button-icon">chevron_left</span>
-          <span class="back-button-text">
-            Back
-          </span>
-        </button>
+        <ui-button class="back-button" @click="router.back()">
+          <template #icon-left>
+            <span class="material-symbols-outlined back-button-icon">chevron_left</span>
+          </template>
+          Back
+        </ui-button>
       </header>
-      <slot/>
+      <div class="content">
+        <slot/>
+      </div>
     </div>
   </div>
 </template>
@@ -33,6 +35,7 @@
 <script setup lang="ts">
 import {RouteName} from '@/services/router';
 import {useRouter} from 'vue-router';
+import {uiButton} from '@/components/ui/Button'
 
 const router = useRouter();
 </script>
@@ -41,6 +44,8 @@ const router = useRouter();
 .default-layout {
   display: flex;
   height: 100%;
+  min-height: 500px;
+  background-color: #E2E2E2;
 }
 
 .header {
@@ -75,7 +80,13 @@ const router = useRouter();
 }
 
 .body {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+}
+
+.content {
+  overflow: auto;
 }
 
 .nav-bar {
@@ -83,6 +94,7 @@ const router = useRouter();
   display: flex;
   flex-direction: column;
   padding: 24px 0 48px;
+  border-right: 1px solid #D2D2D2;
 }
 
 .logo {
@@ -93,6 +105,7 @@ const router = useRouter();
 .navigation-main {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .navigation-link {

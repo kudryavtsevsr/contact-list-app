@@ -1,17 +1,20 @@
 <template>
-  <div>
-    Contact list page
-    <ul>
-      <li>
-        <RouterLink :to="{name: RouteName.ContactEditor, params: {id: 1}}">User 1</RouterLink>
-      </li>
-      <li>
-        <RouterLink :to="{name: RouteName.ContactEditor, params: {id: 2}}">User 2</RouterLink>
-      </li>
-    </ul>
+  <div class="contact-list-page">
+    <h1 class="h1">Venue People</h1>
+
+    <Teams />
+
+    <Users />
   </div>
 </template>
 
 <script setup lang="ts">
-import {RouteName} from '@/services/router'
+import {Teams} from '@/components/Teams'
+import {Users} from '@/components/Users'
 </script>
+
+<style scoped lang="scss">
+.contact-list-page {
+  padding: 36px 48px;
+}
+</style>
