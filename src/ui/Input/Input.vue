@@ -47,9 +47,9 @@ watch(formKitElement, (value) => {
 
   &__label {
     font-family: $font-space-grotesk;
-    font-size: 14px;
+    font-size: rem(14);
     font-weight: 300;
-    color: #5F5F5F;
+    color: $color-text-main-secondary;
     display: block;
     margin-bottom: 4px;
   }
@@ -57,17 +57,17 @@ watch(formKitElement, (value) => {
   &__input {
     width: 100%;
     font-family: $font-space-grotesk;
-    font-size: 16px;
+    font-size: rem(16);
     font-weight: 300;
-    color: #17171D;
-    padding: 23px 16px;
+    color: $color-text-main-primary;
+    padding: rem(23) rem(16);
     display: block;
-    border: 1px solid #D2D2D2;
-    background-color: rgba(#EFEFEF, 0.04);
+    border: 1px solid $color-border-main-quaternary;
+    background-color: rgba($color-text-main-primary-invert, 0.04);
     border-radius: 4px;
 
     &:focus {
-      outline: 1px solid darken(#D2D2D2, 2);
+      outline: 1px solid darken($color-border-main-quaternary, 2);
     }
   }
 

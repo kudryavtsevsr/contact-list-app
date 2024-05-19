@@ -1,6 +1,6 @@
 <template>
   <div class="teams">
-    <h2 class="h2">Teams</h2>
+    <h2 class="h3">Teams</h2>
     <div class="teams-list">
       <div class="team" v-for="team in teams">
         <div class="team-color" :style="{backgroundColor: team.color}"></div>
@@ -28,44 +28,62 @@ const {teams} = storeToRefs(store);
 
 <style scoped lang="scss">
 .teams {
-  margin-bottom: 64px;
+  @include mobile {
+    padding: 0 16px;
+  }
+}
+
+.h3 {
+  @include mobile {
+    padding-left: 0;
+  }
 }
 
 .teams-list {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .team {
   display: flex;
   width: 304px;
-  height: 80px;
-  background-color: #EFEFEF;
+  height: rem(80);
+  background-color: $color-text-main-primary-invert;
   padding: 16px;
   align-items: center;
   border-radius: 4px;
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .team-color {
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: rem(44);
+  height: rem(44);
 }
 
 .team-name {
   font-family: $font-space-grotesk;
-  font-size: 16px;
+  font-size: rem(16);
   margin-left: 16px;
-  color: #17171D;
+  color: $color-text-main-primary;
 }
 
 .team-edit {
   margin-left: auto;
   padding: 10px;
-  font-size: 20px;
+  font-size: rem(20);
 }
 
 .team-add {
-  margin-top: 30px;
+  margin-top: 26px;
+
+  @include mobile {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>

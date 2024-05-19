@@ -1,0 +1,53 @@
+@use '../mixins-and-variables/index' as *;
+
+html {
+  font-size: #{$base-font-size}px;
+
+  @include tablet {
+    font-size: 21px;
+  }
+
+  @include mobile {
+    font-size: 18px;
+  }
+}
+
+.h1 {
+  font-family: $font-cormorant-infant-bold;
+  font-size: rem(42);
+  margin-bottom: 36px;
+  color: $color-text-main-primary;
+}
+
+.h2 {
+  font-family: $font-cormorant-infant-bold;
+  font-size: rem(27);
+  color: $color-text-main-primary-invert;
+}
+
+.h3 {
+  font-family: $font-space-grotesk;
+  font-size: rem(12);
+  padding: 0 0 rem(20) 16px;
+  color: $color-text-main-secondary;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.mobile-hidden {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.tablet-hidden {
+  @include tablet-only {
+    display: none !important;
+  }
+}
+
+.desktop-hidden {
+  @include desktop {
+    display: none !important;
+  }
+}

@@ -12,7 +12,7 @@
   </FormKit>
   <button v-else :class="['ui-button', {[`ui-button_${view}`]: view}]" :type="ButtonType.button">
     <slot name="icon-left"/>
-    <span class="ui-button__text">
+    <span v-if="slots.default" class="ui-button__text">
       <slot/>
     </span>
     <slot name="icon-right"/>
@@ -20,7 +20,10 @@
 </template>
 
 <script setup lang="ts">
+import {useSlots} from 'vue';
 import {ButtonType, ButtonView} from './types';
+
+const slots = useSlots()
 
 const props = defineProps<{
   view?: ButtonView,
@@ -39,32 +42,32 @@ const props = defineProps<{
 
   &_primary {
     padding: 13px;
-    background-color: #282829;
-    color: #EFEFEF;
-    border: 1px solid #D2D2D2;
+    background-color: $color-background-main-primary-invert;
+    color: $color-text-main-primary-invert;
+    border: 1px solid $color-border-main-quaternary;
     border-radius: 30px;
 
     &:focus {
-      outline: 1px solid darken(#D2D2D2, 2);
+      outline: 1px solid darken($color-border-main-quaternary, 2);
     }
   }
 
   &_secondary {
     padding: 13px;
-    background-color: #EFEFEF;
-    color: #17171D;
-    border: 1px solid #D2D2D2;
+    background-color: $color-text-main-primary-invert;
+    color: $color-text-main-primary;
+    border: 1px solid $color-border-main-quaternary;
     border-radius: 30px;
 
     &:focus {
-      outline: 1px solid darken(#D2D2D2, 2);
+      outline: 1px solid darken($color-border-main-quaternary, 2);
     }
   }
 
   &_ghost {
     background-color: transparent;
     border: none;
-    color: #17171D;
+    color: $color-text-main-primary;
 
     #{$root}__text {
       text-decoration: underline;
@@ -78,12 +81,12 @@ const props = defineProps<{
 
   &__text {
     font-family: $font-space-grotesk;
-    font-size: 14px;
+    font-size: rem(14);
   }
 
   &__icon {
     margin-top: 2px;
-    font-size: 19px;
+    font-size: rem(19);
   }
 }
 </style>

@@ -22,6 +22,8 @@ function copyToClipboard(e) {
 
 <style scoped lang="scss">
 .copy-text {
+  overflow: inherit;
+  text-overflow: inherit;
   cursor: copy;
 }
 </style>

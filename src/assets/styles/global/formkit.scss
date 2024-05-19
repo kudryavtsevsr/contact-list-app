@@ -1,12 +1,12 @@
-@use './variables' as *;
+@use '../mixins-and-variables/index' as *;
 
 .formkit-messages {
   list-style: none;
   font-family: $font-space-grotesk;
-  font-size: 14px;
+  font-size: rem(14);
   font-weight: 300;
   display: flex;
   flex-direction: column;
   gap: 3px;
-  color: #ED1651;
+  color: $color-error;
 }

@@ -1,8 +1,8 @@
 <template>
   <FormKit
     type="form"
-    class="contact-editor"
     :classes="{
+        form: 'contact-editor',
         messages: 'contact-editor__messages'
       }"
     :actions="false"
@@ -11,6 +11,11 @@
     <div class="editor">
       <div class="avatar-wrapper">
         <img v-if="user.image" :src="user.image" class="avatar" alt="avatar">
+        <ui-button view="ghost">
+          <template #icon-left>
+            <span class="material-symbols-outlined avatar-edit">border_color</span>
+          </template>
+        </ui-button>
       </div>
       <div class="form">
         <div class="form-row">
@@ -33,8 +38,8 @@
           <ui-input name="postalCode" label="Postal code" v-model="address.postalCode"/>
         </div>
         <ui-input name="country" label="Country" v-model="address.country"/>
+        <FormKitMessages />
       </div>
-
     </div>
     <div class="buttons">
       <ui-button view="secondary" @click="router.back()">
@@ -44,7 +49,6 @@
         Save changes
       </ui-button>
     </div>
-    <FormKitMessages />
   </FormKit>
 </template>
 
@@ -107,10 +111,29 @@ if (!props.add) {
 </script>
 
 <style scoped lang="scss">
+.contact-editor {
+  padding: 64px 48px 30px 40px;
+
+  @include tablet {
+    padding: 0;
+  }
+}
+
 .editor {
-  padding: 48px;
+  padding: 48px 48px 90px 0;
   display: grid;
   grid-template-columns: 184px 1fr;
+
+  @include tablet {
+    padding: 64px 32px;
+    grid-template-columns: 88px 1fr;
+    gap: 32px;
+  }
+
+  @include mobile {
+    padding: 32px 16px;
+    grid-template-columns: 1fr;
+  }
 }
 
 .avatar-wrapper {
@@ -118,12 +141,28 @@ if (!props.add) {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  border: 1px solid #17171D;
-  overflow: hidden;
+  border: 1px solid $color-text-main-primary;
+  position: relative;
+
+  @include tablet-only {
+    margin: 0;
+  }
 }
 
 .avatar {
   width: 100%;
+  border-radius: 50%;
+}
+
+.avatar-edit {
+  padding: 11px;
+  font-size: rem(16);
+  background-color: $color-text-main-primary-invert;
+  border-radius: 50px;
+  border: 1px solid $color-text-main-primary;
+  position: absolute;
+  bottom: 0;
+  right: -20px;
 }
 
 .form {
@@ -147,12 +186,25 @@ if (!props.add) {
   justify-content: end;
   grid-template-columns: 177px 177px;
   grid-gap: 16px;
+
+  @include tablet {
+    background-color: $color-text-main-primary-invert;
+    grid-template-columns: 1fr 1fr;
+    padding: 40px 32px;
+    border-top: 1px solid $color-border-main-quaternary;
+    position:sticky;
+    bottom:0;
+  }
+
+  @include mobile {
+    padding: 16px;
+    background: linear-gradient(to top, $color-border-main-quaternary 0, $color-background-main-primary 100%);
+  }
 }
 </style>
 
 <style lang="scss">
 .contact-editor__messages {
   text-align: right;
-  margin-top: 10px;
 }
 </style>
