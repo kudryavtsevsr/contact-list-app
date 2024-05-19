@@ -1,0 +1,12 @@
+@use './variables' as *;
+
+.formkit-messages {
+  list-style: none;
+  font-family: $font-space-grotesk;
+  font-size: 14px;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #ED1651;
+}

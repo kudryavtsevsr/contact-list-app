@@ -8,7 +8,7 @@
         <span class="material-symbols-outlined team-edit">border_color</span>
       </div>
     </div>
-    <ui-button class="team-add">
+    <ui-button class="team-add" view="ghost">
       <template #icon-left>
         <span class="material-symbols-outlined team-add-icon">add</span>
       </template>
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import {useTeamsStore} from './store';
 import {storeToRefs} from 'pinia';
-import {uiButton} from '@/components/ui/Button'
+import {uiButton} from '@/ui/Button'
 
 const store = useTeamsStore();
 const {teams} = storeToRefs(store);

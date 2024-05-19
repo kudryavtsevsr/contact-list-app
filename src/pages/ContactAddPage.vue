@@ -1,7 +1,7 @@
 <template>
-  <div class="contact-editor-page">
+  <div class="contact-add-page">
     <Suspense>
-      <UsersEditor />
+      <UsersEditor add />
     </Suspense>
   </div>
 </template>
@@ -11,7 +11,7 @@ import {UsersEditor} from '@/modules/UsersEditor'
 </script>
 
 <style scoped lang="scss">
-.contact-editor-page {
+.contact-add-page {
   padding: 64px 48px 30px;
 }
 </style>

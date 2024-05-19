@@ -6,31 +6,41 @@
                   class="user"
                   v-for="user in users"
                   :key="user.id">
-        <img :src="user.image" alt="avatar" class="user-avatar">
-        <div class="user-name">
-          <div class="user-name-display">{{ user.fullName }}</div>
-          <div class="user-name-full">{{ user.displayName }}</div>
+        <div class="avatar-wrapper">
+          <img v-if="user.image" :src="user.image" alt="avatar" class="avatar">
         </div>
-        <div class="user-function">
+        <div class="name">
+          <div class="name-display">{{ user.fullName }}</div>
+          <div class="name-full">{{ user.displayName }}</div>
+        </div>
+        <div class="function">
           {{ user.functionName }}
         </div>
-        <div class="user-email">
-          {{ user.email }}
+        <div class="email">
+          <ui-copy-text>
+            {{ user.email }}
+          </ui-copy-text>
         </div>
-        <div class="user-phone">
-          {{ getDisplayPhone(user.phoneCountryPrefix, user.phoneNumber) }}
+        <div class="phone">
+          <ui-copy-text>
+            {{ getDisplayPhone(user.phoneCountryPrefix, user.phoneNumber) }}
+          </ui-copy-text>
         </div>
-        <div class="user-teams">
-          <div :style="{backgroundColor: getUserTeam(teamId).color}" class="user-team" v-for="teamId in user.teamIds">
-            {{ getUserTeam(teamId).abbreviation }}
+        <div class="teams">
+          <div
+            class="team"
+            v-for="teamId in user.teamIds"
+            :style="{backgroundColor: getUserTeam(String(teamId)).color}"
+            :key="teamId">
+            {{ getUserTeam(String(teamId)).abbreviation }}
           </div>
         </div>
-        <button class="user-delete" @click="deleteUser($event, user.id)">
+        <button class="delete" @click="deleteUserHandler($event, user.id)">
           <span class="material-symbols-outlined">delete</span>
         </button>
       </RouterLink>
     </div>
-    <ui-button class="user-add">
+    <ui-button class="add" view="ghost" @click="router.push({name: RouteName.ContactAdd})">
       <template #icon-left>
         <span class="material-symbols-outlined team-add-icon">add</span>
       </template>
@@ -40,35 +50,30 @@
 </template>
 
 <script setup lang="ts">
-import {computed} from 'vue';
-import {useTeamsStore} from '../Teams';
 import {storeToRefs} from 'pinia';
+import {useRouter} from 'vue-router';
 import {useUsersStore} from './store';
 import {RouteName} from '@/services/router';
-import {uiButton} from '@/components/ui/Button'
+import {uiButton} from '@/ui/Button';
+import {uiCopyText} from '@/ui/CopyText';
 
-const teamsStore = useTeamsStore()
-const {teams} = storeToRefs(teamsStore);
+const router = useRouter();
 
-const usersStore = useUsersStore()
-const {users} = storeToRefs(usersStore);
-
-const hasUsers = computed(() => {
-  return users.value.length !== 0
-})
+const usersStore = useUsersStore();
+const {users, hasUsers} = storeToRefs(usersStore);
+const {fetchUsers, deleteUser, getUserTeam} = usersStore;
 
 function getDisplayPhone(phoneCountryPrefix, phoneNumber) {
-  return `${phoneCountryPrefix} ${phoneNumber}`
+  return phoneCountryPrefix && phoneNumber ? `${phoneCountryPrefix} ${phoneNumber}` : '';
 }
 
-function getUserTeam(teamId) {
-  return teams.value.find(team => team.id === teamId)
+function deleteUserHandler(e, id: string) {
+  e.preventDefault();
+  deleteUser(id);
 }
 
-function deleteUser(e, userId) {
-  e.preventDefault()
-  users.value.splice(0, users.value.length, ...users.value.filter(user => user.id !== userId))
-}
+console.log('User component created');
+fetchUsers();
 </script>
 
 <style scoped lang="scss">
@@ -100,37 +105,44 @@ function deleteUser(e, userId) {
   }
 }
 
-.user-avatar {
+.avatar-wrapper {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 1px solid #17171D;
+  overflow: hidden;
 }
 
-.user-name {
+.avatar {
+  width: 100%;
 }
 
-.user-name-display {
+.name {
+}
+
+.name-display {
   font-weight: 500;
   margin-bottom: 4px;
 }
 
-.user-name-full {
+.name-full {
 }
 
-.user-function {
+.function {
 }
 
-.user-email {
+.email {
 }
 
-.user-phone {
+.phone {
 }
 
-.user-teams {
+.teams {
   margin-left: auto;
   display: flex;
 }
 
-.user-team {
+.team {
   width: 28px;
   height: 28px;
   display: flex;
@@ -144,7 +156,7 @@ function deleteUser(e, userId) {
   }
 }
 
-.user-delete {
+.delete {
   padding: 10px;
   background-color: transparent;
   border: none;
@@ -152,7 +164,7 @@ function deleteUser(e, userId) {
   margin-left: 8px;
 }
 
-.user-add {
+.add {
   margin-top: 30px;
 }
 </style>

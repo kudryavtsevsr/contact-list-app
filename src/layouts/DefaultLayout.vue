@@ -5,7 +5,7 @@
         <img src="@/assets/images/logo-star.svg" alt="logo">
       </RouterLink>
       <nav class="navigation-main">
-        <RouterLink class="navigation-link" :to="{name: RouteName.ContactList}"><span class="material-symbols-outlined">calendar_today</span></RouterLink>
+        <button class="navigation-link"><span class="material-symbols-outlined">calendar_today</span></button>
         <button class="navigation-link"><img src="@/assets/images/icons/events.svg" alt="events"></button>
         <button class="navigation-link"><span class="material-symbols-outlined">account_circle</span></button>
         <button class="navigation-link"><span class="material-symbols-outlined">currency_pound</span></button>
@@ -18,14 +18,14 @@
     </aside>
     <div class="body">
       <header class="header">
-        <ui-button class="back-button" @click="router.back()">
+        <ui-button class="back-button" view="ghost" @click="router.back()">
           <template #icon-left>
             <span class="material-symbols-outlined back-button-icon">chevron_left</span>
           </template>
           Back
         </ui-button>
       </header>
-      <div class="content">
+      <div class="content" ref="contentElement">
         <slot/>
       </div>
     </div>
@@ -33,11 +33,18 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from 'vue';
 import {RouteName} from '@/services/router';
 import {useRouter} from 'vue-router';
-import {uiButton} from '@/components/ui/Button'
+import {uiButton} from '@/ui/Button'
 
 const router = useRouter();
+const contentElement = ref(null)
+
+router.afterEach(() => {
+  contentElement.value?.scrollTo(0, 0);
+})
+
 </script>
 
 <style scoped lang="scss">

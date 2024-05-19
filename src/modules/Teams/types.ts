@@ -1,6 +1,6 @@
 export interface Team {
+  id: string;
   iri: string;
-  id: number;
   name: string;
   color: string;
   abbreviation: string;

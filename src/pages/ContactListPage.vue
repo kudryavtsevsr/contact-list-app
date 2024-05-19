@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import {Teams} from '@/components/Teams'
-import {Users} from '@/components/Users'
+import {Teams} from '@/modules/Teams'
+import {Users} from '@/modules/Users'
 </script>
 
 <style scoped lang="scss">
