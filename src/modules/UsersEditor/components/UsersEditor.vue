@@ -19,9 +19,9 @@
         </div>
         <uiInput name="displayName" label="Display name" v-model="user.displayName"/>
         <uiInput name="functionName" label="Role" v-model="user.functionName"/>
-        <div class="form-row">
+        <div class="form-row form-row_mobile-column">
           <uiInput name="email" label="Email" v-model="user.email" required validation="required|email"/>
-          <uiInput-phone v-model:phone-prefix="user.phoneCountryPrefix" v-model:phone-number="user.phoneNumber" />
+          <uiInputPhone v-model:phone-prefix="user.phoneCountryPrefix" v-model:phone-number="user.phoneNumber" />
         </div>
 
         <div class="form-group">
@@ -145,12 +145,23 @@ if (!props.add) {
 .form {
   display: grid;
   gap: 32px;
+
+  @include mobile {
+    gap: 24px;
+  }
 }
 
 .form-row {
   display: grid;
   gap: 16px;
   grid-template-columns: 1fr 1fr;
+
+  &_mobile-column {
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
 }
 
 .form-group {
