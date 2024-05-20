@@ -77,7 +77,6 @@ function deleteUserHandler(e, id: string) {
   deleteUser(id);
 }
 
-console.log('User component created');
 fetchUsers();
 </script>
 

@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia';
 import {ref, computed} from 'vue';
 import {storeToRefs} from 'pinia';
-import axios from 'axios';
+import axios from '@/services/api';
 import {User} from './types';
 import {useTeamsStore} from '@/modules/Teams';
 
@@ -18,7 +18,7 @@ export const useUsersStore = defineStore('users', () => {
 
   async function fetchUsers() {
     try {
-      const { data } = await axios.get<User[]>('//localhost:5002/users')
+      const { data } = await axios.get<User[]>('users')
       users.value = data
     } catch (e) {
       console.error(e);
@@ -27,7 +27,7 @@ export const useUsersStore = defineStore('users', () => {
 
   async function fetchUser(id: string) {
     try {
-      const { data } = await axios.get<User[]>(`//localhost:5002/users/${id}`)
+      const { data } = await axios.get<User[]>(`users/${id}`)
       user.value = data
     } catch (e) {
       console.error(e);
@@ -36,8 +36,7 @@ export const useUsersStore = defineStore('users', () => {
 
   async function deleteUser(id: string) {
     try {
-      const { data } = await axios.delete(`//localhost:5002/users/${id}`)
-      console.log('deleteUser', data)
+      await axios.delete(`users/${id}`)
     } catch (e) {
       console.error(e);
     }
@@ -47,8 +46,7 @@ export const useUsersStore = defineStore('users', () => {
 
   async function createUser() {
     try {
-      const { data } = await axios.post(`//localhost:5002/users/`, user.value)
-      console.log('createUser', data)
+      await axios.post(`users`, user.value)
     } catch (e) {
       console.error(e);
     }
@@ -56,8 +54,7 @@ export const useUsersStore = defineStore('users', () => {
 
   async function editUser(id: string) {
     try {
-      const { data } = await axios.put(`//localhost:5002/users/${id}`, user.value)
-      console.log('editUser', data)
+      await axios.put(`users/${id}`, user.value)
     } catch (e) {
       console.error(e);
     }

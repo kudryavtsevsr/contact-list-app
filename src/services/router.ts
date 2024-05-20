@@ -5,7 +5,6 @@ export const enum RouteName {
   ContactList = 'contact-list',
   ContactEditor = 'contact-editor',
   ContactAdd = 'contact-add',
-  Components = 'components',
   NotFound = 'not-found'
 }
 
@@ -33,11 +32,6 @@ const routes = [
     path: '/contact-add',
     name: RouteName.ContactAdd,
     component: () => import('@/pages/ContactAddPage.vue')
-  },
-  {
-    path: '/components',
-    name: RouteName.Components,
-    component: () => import('@/pages/Components.vue')
   }
 ]
 
