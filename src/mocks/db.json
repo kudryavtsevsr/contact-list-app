@@ -132,47 +132,6 @@
       "country": "NL",
       "postalCode": "1010TD",
       "state": null
-    },
-    {
-      "id": "5556",
-      "addressLineOne": "fsfd",
-      "addressLineTwo": "sdf",
-      "city": "sdfs",
-      "country": "df",
-      "postalCode": "df"
-    },
-    {
-      "id": "5c1e"
-    },
-    {
-      "id": "8eec",
-      "addressLineOne": "sdf",
-      "addressLineTwo": "sdf",
-      "postalCode": "sdfs",
-      "city": "df",
-      "country": "sdf"
-    },
-    {
-      "id": "8eec",
-      "addressLineOne": "sdf",
-      "addressLineTwo": "sdf",
-      "postalCode": "sdfs",
-      "city": "df",
-      "country": "sdf"
-    },
-    {
-      "id": "e04e"
-    },
-    {
-      "id": "6c2b"
-    },
-    {
-      "id": "c08b",
-      "addressLineOne": "sdf",
-      "addressLineTwo": "sdf",
-      "city": "sdf",
-      "postalCode": "sdf",
-      "country": "sdf"
     }
   ]
 }

@@ -2,7 +2,7 @@
   <RouterLink :to="{name: RouteName.ContactEditor, params: {id: user.id}}"
                   class="user">
         <div class="avatar-wrapper">
-          <uiAvatar :src="user.image" />
+          <uiAvatar :src="user.image || ''" />
         </div>
         <div class="name-function">
           <div class="name">
