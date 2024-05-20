@@ -26,6 +26,16 @@ export const useAddressesStore = defineStore('addresses', () => {
     }
   }
 
+  async function deleteAddress(id: string) {
+    try {
+      await axios.delete(`addresses/${id}`)
+    } catch (e) {
+      console.error(e);
+    }
+
+    addresses.value = addresses.value.filter(address => address.id !== id)
+  }
+
   function getAddress(id: string): Address {
     return addresses.find(address => address.id === id)
   }
@@ -56,6 +66,7 @@ export const useAddressesStore = defineStore('addresses', () => {
     address,
     getAddress,
     fetchAddresses,
+    deleteAddress,
     fetchAddress,
     editAddress,
     createAddress,

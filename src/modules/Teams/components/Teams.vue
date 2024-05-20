@@ -2,25 +2,22 @@
   <div class="teams">
     <h2 class="h3">Teams</h2>
     <div class="teams-list">
-      <div class="team" v-for="team in teams">
-        <div class="team-color" :style="{backgroundColor: team.color}"></div>
-        <div class="team-name">{{ team.name }}</div>
-        <span class="material-symbols-outlined team-edit">border_color</span>
-      </div>
+      <Team v-for="team in teams" :team="team" :key="team.id" />
     </div>
-    <ui-button class="team-add" view="ghost">
+    <uiButton class="team-add" view="ghost">
       <template #icon-left>
         <span class="material-symbols-outlined team-add-icon">add</span>
       </template>
       New Team
-    </ui-button>
+    </uiButton>
   </div>
 </template>
 
 <script setup lang="ts">
-import {useTeamsStore} from './store';
 import {storeToRefs} from 'pinia';
 import {uiButton} from '@/ui/Button'
+import {useTeamsStore} from '../store';
+import Team from './Team.vue'
 
 const store = useTeamsStore();
 const {teams} = storeToRefs(store);

@@ -10,50 +10,45 @@
   >
     <div class="editor">
       <div class="avatar-wrapper">
-        <img v-if="user.image" :src="user.image" class="avatar" alt="avatar">
-        <ui-button view="ghost">
-          <template #icon-left>
-            <span class="material-symbols-outlined avatar-edit">border_color</span>
-          </template>
-        </ui-button>
+        <uiAvatar :src="user.image || ''" editable />
       </div>
       <div class="form">
         <div class="form-row">
-          <ui-input name="fullName" label="Full name" v-model="user.fullName" required validation="required"/>
-          <ui-input name="initials" label="Initials" v-model="user.initials" validation="length:2,2|uppercase"/>
+          <uiInput name="fullName" label="Full name" v-model="user.fullName" required validation="required"/>
+          <uiInput name="initials" label="Initials" v-model="user.initials" validation="length:2,2|uppercase"/>
         </div>
-        <ui-input name="displayName" label="Display name" v-model="user.displayName"/>
-        <ui-input name="functionName" label="Role" v-model="user.functionName"/>
+        <uiInput name="displayName" label="Display name" v-model="user.displayName"/>
+        <uiInput name="functionName" label="Role" v-model="user.functionName"/>
         <div class="form-row">
-          <ui-input name="email" label="Email" v-model="user.email" required validation="required|email"/>
-          <ui-input-phone v-model:phone-prefix="user.phoneCountryPrefix" v-model:phone-number="user.phoneNumber" />
+          <uiInput name="email" label="Email" v-model="user.email" required validation="required|email"/>
+          <uiInput-phone v-model:phone-prefix="user.phoneCountryPrefix" v-model:phone-number="user.phoneNumber" />
         </div>
 
         <div class="form-group">
-          <ui-input name="addressLineOne" label="Street" v-model="address.addressLineOne"/>
-          <ui-input name="addressLineTwo" label="" v-model="address.addressLineTwo"/>
+          <uiInput name="addressLineOne" label="Street" v-model="address.addressLineOne"/>
+          <uiInput name="addressLineTwo" label="" v-model="address.addressLineTwo"/>
         </div>
         <div class="form-row">
-          <ui-input name="city" label="City" v-model="address.city"/>
-          <ui-input name="postalCode" label="Postal code" v-model="address.postalCode"/>
+          <uiInput name="city" label="City" v-model="address.city"/>
+          <uiInput name="postalCode" label="Postal code" v-model="address.postalCode"/>
         </div>
-        <ui-input name="country" label="Country" v-model="address.country"/>
+        <uiInput name="country" label="Country" v-model="address.country"/>
         <FormKitMessages />
       </div>
     </div>
     <div class="buttons">
-      <ui-button view="secondary" @click="router.back()">
+      <uiButton view="secondary" @click="router.back()">
         Cancel
-      </ui-button>
-      <ui-button view="primary" type="submit">
+      </uiButton>
+      <uiButton view="primary" type="submit">
         Save changes
-      </ui-button>
+      </uiButton>
     </div>
   </FormKit>
 </template>
 
 <script setup lang="ts">
-import {ref, watch, computed} from 'vue';
+import {computed} from 'vue';
 import {storeToRefs} from 'pinia';
 import {useRoute, useRouter} from 'vue-router';
 import { FormKitMessages } from '@formkit/vue'
@@ -61,8 +56,9 @@ import {useUsersStore} from '@/modules/Users';
 import {uiInput} from '@/ui/Input';
 import {uiInputPhone} from '@/ui/InputPhone';
 import {uiButton} from '@/ui/Button';
-import {useAddressesStore} from '../Addresses';
-import {RouteName} from '../../services/router';
+import {uiAvatar} from '@/ui/Avatar';
+import {useAddressesStore} from '@/modules/Addresses';
+import {RouteName} from '@/services/router';
 
 const props = defineProps<{
   add?: false
@@ -140,29 +136,10 @@ if (!props.add) {
   margin: 0 auto;
   width: 72px;
   height: 72px;
-  border-radius: 50%;
-  border: 1px solid $color-text-main-primary;
-  position: relative;
 
   @include tablet-only {
     margin: 0;
   }
-}
-
-.avatar {
-  width: 100%;
-  border-radius: 50%;
-}
-
-.avatar-edit {
-  padding: 11px;
-  font-size: rem(16);
-  background-color: $color-text-main-primary-invert;
-  border-radius: 50px;
-  border: 1px solid $color-text-main-primary;
-  position: absolute;
-  bottom: 0;
-  right: -20px;
 }
 
 .form {

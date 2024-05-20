@@ -18,29 +18,29 @@
           <button class="navigation-link"><span class="material-symbols-outlined">info</span></button>
         </nav>
       </div>
-      <ui-button class="nav-expand" view="ghost">
+      <uiButton class="nav-expand" view="ghost">
         <template #icon-left>
           <span class="material-symbols-outlined nav-expand-icon">chevron_right</span>
         </template>
-      </ui-button>
+      </uiButton>
     </aside>
 
     <div class="body">
       <header class="header">
-        <ui-button class="header-button" view="ghost" @click="router.back()">
+        <uiButton class="header-button" view="ghost" @click="router.back()">
           <template #icon-left>
             <span class="material-symbols-outlined header-button-icon">chevron_left</span>
           </template>
           <span class="mobile-hidden">Back</span>
-        </ui-button>
+        </uiButton>
         <div v-if="title" class="h2 title" :class="{'desktop-hidden': isTitleHiddenOnDesktop}">
           {{ title }}
         </div>
-        <ui-button class="header-button tablet-hidden desktop-hidden" view="ghost">
+        <uiButton class="header-button tablet-hidden desktop-hidden" view="ghost">
           <template #icon-left>
             <span class="material-symbols-outlined header-button-icon">more_vert</span>
           </template>
-        </ui-button>
+        </uiButton>
       </header>
       <div class="content" ref="contentElement">
         <slot/>

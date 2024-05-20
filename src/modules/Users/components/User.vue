@@ -1,13 +1,8 @@
 <template>
-  <div class="users">
-    <h2 class="h3">users</h2>
-    <div class="users-list" v-if="hasUsers">
-      <RouterLink :to="{name: RouteName.ContactEditor, params: {id: user.id}}"
-                  class="user"
-                  v-for="user in users"
-                  :key="user.id">
+  <RouterLink :to="{name: RouteName.ContactEditor, params: {id: user.id}}"
+                  class="user">
         <div class="avatar-wrapper">
-          <img v-if="user.image" :src="user.image" alt="avatar" class="avatar">
+          <uiAvatar :src="user.image" />
         </div>
         <div class="name-function">
           <div class="name">
@@ -20,15 +15,15 @@
         </div>
         <div class="email-phone">
           <div class="email mobile-hidden">
-            <ui-copy-text>
+            <uiCopyText>
               {{ user.email }}
-            </ui-copy-text>
+            </uiCopyText>
           </div>
           <span class="mobile-hidden desktop-hidden">|</span>
           <div class="phone">
-            <ui-copy-text>
+            <uiCopyText>
               {{ getDisplayPhone(user.phoneCountryPrefix, user.phoneNumber) }}
-            </ui-copy-text>
+            </uiCopyText>
           </div>
         </div>
         <div class="teams">
@@ -40,60 +35,46 @@
             {{ getUserTeam(String(teamId)).abbreviation }}
           </div>
         </div>
-        <button class="delete" @click="deleteUserHandler($event, user.id)">
+        <button class="delete" @click="deleteUserHandler($event, user.id, user.address)">
           <span class="material-symbols-outlined">delete</span>
         </button>
       </RouterLink>
-    </div>
-    <ui-button class="add" view="ghost" @click="router.push({name: RouteName.ContactAdd})">
-      <template #icon-left>
-        <span class="material-symbols-outlined team-add-icon">add</span>
-      </template>
-      New User
-    </ui-button>
-  </div>
 </template>
 
 <script setup lang="ts">
-import {storeToRefs} from 'pinia';
 import {useRouter} from 'vue-router';
-import {useUsersStore} from './store';
 import {RouteName} from '@/services/router';
 import {uiButton} from '@/ui/Button';
 import {uiCopyText} from '@/ui/CopyText';
+import {uiAvatar} from '@/ui/Avatar';
+import {useUsersStore} from '../store';
+import {User} from '../types';
+import {useAddressesStore} from '@/modules/Addresses';
+
+const props = defineProps<{
+  user: User
+}>()
 
 const router = useRouter();
 
 const usersStore = useUsersStore();
-const {users, hasUsers} = storeToRefs(usersStore);
-const {fetchUsers, deleteUser, getUserTeam} = usersStore;
+const {deleteUser, getUserTeam} = usersStore;
+
+const addressesStore = useAddressesStore();
+const {deleteAddress} = addressesStore;
 
 function getDisplayPhone(phoneCountryPrefix, phoneNumber) {
   return phoneCountryPrefix && phoneNumber ? `${phoneCountryPrefix} ${phoneNumber}` : '';
 }
 
-function deleteUserHandler(e, id: string) {
+function deleteUserHandler(e, userId: string, addressId: string) {
   e.preventDefault();
-  deleteUser(id);
+  deleteUser(userId);
+  deleteAddress(addressId);
 }
-
-fetchUsers();
 </script>
 
 <style scoped lang="scss">
-.users {
-
-}
-
-.users-list {
-  border-radius: 20px;
-  border: 1px solid $color-border-main-quaternary;
-
-  @include mobile {
-    border-radius: 0;
-  }
-}
-
 .user {
   display: grid;
   overflow: hidden;
@@ -129,14 +110,7 @@ fetchUsers();
 .avatar-wrapper {
   width: rem(32);
   height: rem(32);
-  border-radius: 50%;
-  border: 1px solid $color-text-main-primary;
-  overflow: hidden;
   grid-area: avatar;
-}
-
-.avatar {
-  width: 100%;
 }
 
 .name {
@@ -214,15 +188,6 @@ fetchUsers();
     gap: 4px;
     align-self: start;
     color: $color-text-main-secondary;
-  }
-}
-
-.add {
-  margin-top: 26px;
-
-  @include mobile {
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 </style>

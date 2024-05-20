@@ -1,1 +1,1 @@
-export { default as UsersEditor } from './UsersEditor.vue';
+export { default as UsersEditor } from './components/UsersEditor.vue';

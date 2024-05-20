@@ -1,5 +1,5 @@
 <template>
-  <ui-input
+  <uiInput
     name="phoneNumber"
     label="Phone number"
     inner-class="ui-input-phone__inner"
@@ -8,7 +8,7 @@
     @refChanged="refChangedHandler1"
   >
     <template #prefix>
-      <ui-input
+      <uiInput
         name="phoneCode"
         label=""
         placeholder="+"
@@ -21,7 +21,7 @@
       <FormKitMessages :node="formKitCodeElement?.node" />
       <FormKitMessages :node="formKitNumberElement?.node" />
     </template>
-  </ui-input>
+  </uiInput>
 </template>
 
 <script setup lang="ts">
