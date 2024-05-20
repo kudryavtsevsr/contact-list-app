@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "server": "json-server --watch ./src/mocks/db.json --port 5002",
-    "vite": "vite",
+    "vite": "vite --port 5003",
     "dev": "npm-run-all --parallel server vite",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 5003",
     "start": "npm-run-all --parallel server preview"
   },
   "dependencies": {

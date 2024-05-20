@@ -29,7 +29,7 @@
     {
       "id": "1",
       "iri": "/api/staff/1000",
-      "fullName": "Full name 3212",
+      "fullName": "Full name",
       "displayName": "User name",
       "initials": "UN",
       "email": "user.name@venue.nl",
